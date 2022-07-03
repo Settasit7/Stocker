@@ -4,7 +4,7 @@ st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_tren
 
 st.subheader('This is...')
 st.title('Stocker')
-st.write('เว็บแอปทำนายราคาปิดหุ้นรายวันโดยใช้ปัญญาประดิษฐ์')
+st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตโดยใช้ปัญญาประดิษฐ์')
 
 st.write('---')
 
@@ -42,8 +42,12 @@ with st.spinner('แปป...'):
     ratio = percent / 100
     optimizer = 'nadam'
     loss = 'mean_squared_error'
-
-    df0 = yf.download(name, date1, date2)
+    
+    @st.cache
+    def load_model():
+        return yf.download(name, date1, date2)
+    
+    df0 = load_model()
 
     df1 = df0.filter(['Close'])
     le0 = len(df1)
