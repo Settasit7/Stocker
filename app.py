@@ -43,7 +43,7 @@ with st.spinner('แปป...'):
     optimizer = 'nadam'
     loss = 'mean_squared_error'
     
-    @st.cache
+    @st.experimental_memo
     def load_model():
         return yf.download(name, date1, date2)
     
@@ -189,3 +189,5 @@ contact_form = '''
 '''
 
 st.markdown(contact_form, unsafe_allow_html = True)
+
+st.experimental_memo.clear()
