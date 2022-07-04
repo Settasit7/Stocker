@@ -13,6 +13,7 @@ st.write('##')
 column1, column2, column3 = st.columns(3)
 
 with column1:
+    st.write('##')
     st.write('1. เลือกหุ้น')
     st.write('##')
     name = st.text_input('กรอกชื่อย่อหุ้น', 'PTT.BK')
@@ -21,6 +22,7 @@ with column1:
     st.write('หุ้นต่างประเทศ: กรอกชื่อย่อปกติ')
 
 with column2:
+    st.write('##')
     st.write('2. ดึงข้อมูล')
     st.write('##')
     date1 = st.text_input('ดึงข้อมูลมาตั้งแต่วันที่เท่าไหร่', '2022-01-01')
@@ -28,9 +30,10 @@ with column2:
     date2 = st.text_input('ดึงข้อมูลมาจนถึงวันที่เท่าไหร่', '2022-06-30')
     st.write('##')
     st.write('หมายเหตุ:')
-    st.write('วันที่เริ่มต้นต้องอยู่ก่อนวันที่สิ้นสุดการดึงข้อมูล')
+    st.write('วันที่เริ่มต้นการดึงข้อมูลต้องอยู่ก่อนวันที่สิ้นสุดการดึงข้อมูล')
 
 with column3:
+    st.write('##')
     st.write('3. ทำนายอนาคต')
     st.write('##')
     date3 = st.text_input('ทำนายราคาปิดจนถึงวันที่เท่าไหร่', '2022-08-31')
