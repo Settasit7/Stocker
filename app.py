@@ -4,7 +4,7 @@ st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_tren
 
 st.subheader('This is...')
 st.title('Stocker')
-st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตโดยใช้ปัญญาประดิษฐ์')
+st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตโดยใช้ปัญญาประดิษฐ์:sunglasses:')
 
 st.write('---')
 
