@@ -203,7 +203,7 @@ contact_form = '''
      <input type = 'text' name = 'name' placeholder = 'ชื่อ' required>
      <input type = 'email' name = 'email' placeholder = 'อีเมล' required>
      <textarea name = 'message' placeholder = 'ข้อความ' required></textarea>
-     <button type="submit">Send</button>
+     <button type="submit">ส่ง</button>
 </form>
 '''
 
