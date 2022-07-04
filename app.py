@@ -2,53 +2,74 @@ import streamlit as st
 
 st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_trend:' , layout = 'wide')
 
-st.subheader('This is...')
 st.title('Stocker')
-st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตโดยใช้ปัญญาประดิษฐ์:sunglasses:')
+st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตด้วยปัญญาประดิษฐ์ :space_invader:')
 
 st.write('---')
 
-st.header('เลือกข้อมูล')
+st.header('เริ่มการทำนาย')
 st.write('##')
-name = st.text_input('หุ้นชื่อย่ออะไร: ', 'PTTGC.BK')
-date1 = st.text_input('เรียกดูข้อมูลตั้งแต่วันไหน: ', '2022-01-01')
-date2 = st.text_input('เรียกดูข้อมูลจนถึงวันไหน: ', '2022-06-30')
-date3 = st.text_input('ทำนายราคาปิดจนถึงวันไหน: ', '2022-07-31')
 
-st.write('---')
+column1, column2, column3 = st.columns(3)
 
-st.header('ปรับพารามิเตอร์')
-st.write('##')
-day = st.number_input('ทำนายราคาปิดแต่ละวันโดยใช้ข้อมูลย้อนหลังทั้งหมดกี่วัน: ', min_value = 1, value = 30)
-percent = st.number_input('ข้อมูลที่เรียกดูทั้งหมดจะแบ่งมาใช้ในการเทรนกี่เปอร์เซ็นต์: ', min_value = 1, max_value = 100, value = 80)
+with column1:
+    st.write('1. เลือกหุ้น')
+    st.write('##')
+    name = st.text_input('กรอกชื่อย่อหุ้น', 'PTT.BK')
+    st.write('##')
+    st.write('หุ้นไทย: กรอกชื่อย่อตามด้วย.BK')
+    st.write('หุ้นต่างประเทศ: กรอกชื่อย่อปกติ')
+
+with column2:
+    st.write('2. ดึงข้อมูล')
+    st.write('##')
+    date1 = st.text_input('ดึงข้อมูลมาตั้งแต่วันที่เท่าไหร่', '2022-01-01')
+    st.write('##')
+    date2 = st.text_input('ดึงข้อมูลมาจนถึงวันที่เท่าไหร่', '2022-06-30')
+    st.write('##')
+    st.write('หมายเหตุ:')
+    st.write('วันที่เริ่มต้นต้องอยู่ก่อนวันที่สิ้นสุดการดึงข้อมูล')
+
+with column3:
+    st.write('3. ทำนายอนาคต')
+    st.write('##')
+    date3 = st.text_input('ทำนายราคาปิดจนถึงวันที่เท่าไหร่', '2022-08-31')
+    st.write('##')
+    day = st.number_input('ทำนายโดยใช้ข้อมูลย้อนหลังทั้งหมดกี่วัน', min_value = 1, value = 60)
+    st.write('##')
+    percent = st.number_input('แบ่งข้อมูลที่ดึงมาใช้ในการเทรนกี่เปอร์เซ็นต์', min_value = 1, max_value = 100, value = 90)
+    st.write('##')
+    st.write('หมายเหตุ:')
+    st.write('จำนวนข้อมูลที่จะใช้ทำนายต้องน้อยกว่าหรือเท่ากับจำนวนข้อมูลที่ดึงมาจากขั้นตอนก่อนหน้า')
 
 st.write('---')
 
 with st.spinner('แปป...'):
 
-    import yfinance as yf
     import math
-    import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
+    import yfinance as yf
+    import matplotlib.pyplot as plt
     from keras.models import Sequential
     from keras.layers import Dense, LSTM
     from sklearn.preprocessing import MinMaxScaler
     plt.style.use('https://github.com/dhaitz/matplotlib-stylesheets/raw/master/pitayasmoothie-light.mplstyle')
 
+    ratio = percent / 100
+
     input = day
     dense = math.ceil(((2 / 3) * input) + 1)
     output = 1
-    ratio = percent / 100
+
     optimizer = 'nadam'
     loss = 'mean_squared_error'
-    
+
     @st.experimental_memo
     def load_model():
         return yf.download(name, date1, date2)
-    
-    df0 = load_model()
 
+    df0 = load_model()
     df1 = df0.filter(['Close'])
     le0 = len(df1)
 
@@ -61,11 +82,9 @@ with st.spinner('แปป...'):
 
     df3 = pd.concat([df1, df2])
     df3 = df3.fillna(np.nan)
-
     df4 = df3.filter(['Close'])
     ra1 = df4.values
     le1 = math.ceil(le0 * ratio)
-
     df3.reset_index(inplace = True)
 
     scaler = MinMaxScaler(feature_range = (0,1))
@@ -86,9 +105,7 @@ with st.spinner('แปป...'):
     model.add(LSTM(input, return_sequences = False))
     model.add(Dense(dense))
     model.add(Dense(output))
-
     model.compile(optimizer, loss)
-
     model.fit(tr1, tr2, batch_size = 1, epochs = 3)
 
     te0 = sc1[le1 - day:,:]
@@ -96,9 +113,7 @@ with st.spinner('แปป...'):
     le = len(sc1)
     te1 = []
     te1.append(sc1[le1 - day:le1,0])
-
     te1 = np.array(te1)
-
     te1 = np.reshape(te1, (te1.shape[0], te1.shape[1], 1))
 
     for i in range(le1 + 1, le):
@@ -159,7 +174,7 @@ with st.spinner('แปป...'):
 
 st.success('เสร็จละ')
 
-st.header('ผลการทำนายราคาปิดหุ้นรายวัน')
+st.header('ผลการทำนาย')
 st.write('##')
 
 st.write(fig)
@@ -174,6 +189,7 @@ st.write('---')
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html = True)
+
 local_css("style/style.css")
 
 st.header('มาคุยกัน')
