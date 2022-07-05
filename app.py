@@ -209,4 +209,14 @@ contact_form = '''
 
 st.markdown(contact_form, unsafe_allow_html = True)
 
+hide_st_style = '''
+<style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+</style>
+'''
+
+st.markdown(hide_st_style, unsafe_allow_html = True)
+
 st.experimental_memo.clear()
