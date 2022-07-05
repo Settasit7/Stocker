@@ -2,6 +2,16 @@ import streamlit as st
 
 st.set_page_config(page_title = 'Stocker', page_icon = ':chart_with_upwards_trend:' , layout = 'wide')
 
+hide_st_style = '''
+<style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+</style>
+'''
+
+st.markdown(hide_st_style, unsafe_allow_html = True)
+
 st.title('Stocker')
 st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตด้วยปัญญาประดิษฐ์ :space_invader:')
 
@@ -208,15 +218,5 @@ contact_form = '''
 '''
 
 st.markdown(contact_form, unsafe_allow_html = True)
-
-hide_st_style = '''
-<style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-</style>
-'''
-
-st.markdown(hide_st_style, unsafe_allow_html = True)
 
 st.experimental_memo.clear()
