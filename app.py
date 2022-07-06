@@ -12,7 +12,7 @@ hide_st_style = '''
 
 st.markdown(hide_st_style, unsafe_allow_html = True)
 
-@st.experimental_memo
+@st.experimental_memo(suppress_st_warning=True)
 def function():
     
     st.title('Stocker')
