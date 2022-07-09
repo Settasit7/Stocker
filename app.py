@@ -121,7 +121,7 @@ def function():
     st.header('ผลการทำนาย')
     st.write('##')
 
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width = True)
 
     st.write(df5)
 
