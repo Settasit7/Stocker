@@ -99,7 +99,7 @@ def function():
         from plotly.subplots import make_subplots
 
         fig = make_subplots(specs = [[{"secondary_y": True}]])
-        fig.update_layout(autosize = False, width = 1000, height = 600)
+        fig.update_layout(autosize = True)
         fig.add_trace(go.Scatter(x = df4.index, y = df4['Predict^'], name = 'Predict^', marker_color = 'blue'))
         fig.add_trace(go.Scatter(x = df4.index, y = df4['Predict^Upper'], name = 'Predict^Upper', marker_color = 'lightblue', showlegend = False))
         fig.add_trace(go.Scatter(x = df4.index, y = df4['Predict^Lower'], name = 'Predict^Lower', marker_color = 'lightblue', showlegend = False))
