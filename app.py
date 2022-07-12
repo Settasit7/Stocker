@@ -18,7 +18,7 @@ def function():
     st.title('Stocker')
     st.write('##')
     st.write('เว็บแอปทำนายราคาปิดหุ้นในอนาคตด้วยปัญญาประดิษฐ์')
-    st.write(':globe_with_meridians: [English](https://translate.google.co.th/?hl=th&sl=th&tl=en&op=translate)')
+    st.write(':globe_with_meridians: [English](https://settasit7-stocker-english-app-4dkkna.streamlitapp.com)')
 
     st.write('---')
 
