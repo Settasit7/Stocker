@@ -40,7 +40,7 @@ def function():
         st.write('##')
         st.write('2. ดึงข้อมูล')
         st.write('##')
-        date1 = st.text_input('ดึงข้อมูลมาตั้งแต่วันที่เท่าไหร่', '2022-01-01')
+        date1 = st.text_input('ดึงข้อมูลมาตั้งแต่วันที่เท่าไหร่', '2020-01-01')
         st.write('##')
         st.write('หมายเหตุ:')
         st.write('โปรแกรมจะดึงข้อมูลมาตั้งแต่วันที่ในช่องด้านบนจนถึงเมื่อวาน')
@@ -49,7 +49,7 @@ def function():
         st.write('##')
         st.write('3. ทำนายอนาคต')
         st.write('##')
-        date3 = st.text_input('ทำนายราคาปิดจนถึงวันที่เท่าไหร่', '2023-01-31')
+        date3 = st.text_input('ทำนายราคาปิดจนถึงวันที่เท่าไหร่', '2023-12-31')
         st.write('##')
         st.write('หมายเหตุ:')
         st.write('โปรแกรมจะทำนายราคาปิดตั้งแต่วันแรกที่ดึงข้อมูลจนถึงวันที่ในช่องด้านบน')
@@ -149,7 +149,7 @@ def function():
             <input type = 'text' name = 'name' placeholder = 'ชื่อ' required>
             <input type = 'email' name = 'email' placeholder = 'อีเมล' required>
             <textarea name = 'message' placeholder = 'ข้อความ' required></textarea>
-            <button type="submit">ส่ง</button>
+            <button type="submit">ส่งเลย</button>
         </form>
         '''
 
